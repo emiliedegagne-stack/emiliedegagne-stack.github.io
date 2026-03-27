@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Reading Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>📚 My Reading Dashboard</h1>
+
+<div id="language-toggle">
+  <button onclick="setLanguage('en')">English</button>
+  <button onclick="setLanguage('fr')">Français</button>
+</div>
+
+<div id="filters">
+  <input type="text" id="search" placeholder="Search books..." oninput="renderBooks()">
+  <select id="yearFilter" onchange="renderBooks()">
+    <option value="">All Years</option>
+  </select>
+  <select id="genreFilter" onchange="renderBooks()">
+    <option value="">All Genres</option>
+  </select>
+</div>
+
+<div id="stats">
+  <div id="totalBooks"></div>
+  <div id="avgRating"></div>
+  <div id="booksPerYear"></div>
+</div>
+
+<div id="book-container"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
