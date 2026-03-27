@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "rating": 5,
+    "year": 2026,
+    "note_en": "Super practical and clear",
+    "note_fr": "Super pratique et clair",
+    "genre": "Self-Help"
+  },
+  {
+    "title": "The Left Hand of Darkness",
+    "author": "Ursula K. Le Guin",
+    "rating": 4,
+    "year": 2026,
+    "note_en": "Thought-provoking sci-fi",
+    "note_fr": "Science-fiction qui fait réfléchir",
+    "genre": "Science Fiction"
+  }
+]
