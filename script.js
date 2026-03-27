@@ -1,5 +1,6 @@
 let books = [];
 let currentLang = 'en';
+let booksPerYearChart, genreChart;
 
 const translations = {
   en: {
@@ -26,6 +27,7 @@ function setLanguage(lang) {
   currentLang = lang;
   applyTranslations();
   renderBooks();
+  renderCharts();
 }
 
 fetch('books.json')
@@ -36,12 +38,12 @@ fetch('books.json')
     renderBooks();
     renderStats();
     applyTranslations();
+    renderCharts();
   });
 
 function populateFilters() {
   const yearSet = new Set();
   const genreSet = new Set();
-
   books.forEach(b => { yearSet.add(b.year); genreSet.add(b.genre); });
 
   const yearSelect = document.getElementById('yearFilter');
@@ -102,4 +104,49 @@ function renderBooks() {
         </div>
       `;
     });
+  renderCharts();
+}
+
+function renderStats() {
+  applyTranslations();
+}
+
+function renderCharts() {
+  // Books per Year
+  const booksPerYearData = {};
+  books.forEach(b => booksPerYearData[b.year] = (booksPerYearData[b.year] || 0) + 1);
+  const years = Object.keys(booksPerYearData).sort();
+  const yearCounts = years.map(y => booksPerYearData[y]);
+  if (booksPerYearChart) booksPerYearChart.destroy();
+  booksPerYearChart = new Chart(document.getElementById('booksPerYearChart'), {
+    type: 'bar',
+    data: {
+      labels: years,
+      datasets: [{
+        label: currentLang==='fr' ? 'Livres par année' : 'Books per Year',
+        data: yearCounts,
+        backgroundColor: '#66ccff'
+      }]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+  });
+
+  // Genre Distribution
+  const genreData = {};
+  books.forEach(b => genreData[b.genre] = (genreData[b.genre] || 0) + 1);
+  const genres = Object.keys(genreData);
+  const counts = genres.map(g => genreData[g]);
+  if (genreChart) genreChart.destroy();
+  genreChart = new Chart(document.getElementById('genreChart'), {
+    type: 'pie',
+    data: {
+      labels: genres,
+      datasets: [{
+        label: currentLang==='fr' ? 'Répartition par genre' : 'Genre Distribution',
+        data: counts,
+        backgroundColor: genres.map((_,i) => `hsl(${i*60},70%,60%)`)
+      }]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+  });
 }
