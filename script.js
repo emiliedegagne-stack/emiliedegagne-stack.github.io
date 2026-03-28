@@ -31,6 +31,7 @@ const translations = {
   }
 };
 
+// --- LANGUAGE SWITCH ---
 function setLanguage(lang) {
   currentLang = lang;
   applyTranslations();
@@ -51,10 +52,11 @@ function updateLanguageDropdown() {
   `;
 }
 
+// --- FILTERS ---
 function populateFilters() {
+  // Years
   const yearSet = new Set();
-  const genreSet = new Set();
-  books.forEach(b => { yearSet.add(b.year); genreSet.add(b.genre); });
+  books.forEach(b => yearSet.add(b.year));
 
   const yearSelect = document.getElementById('yearFilter');
   yearSelect.innerHTML = '';
@@ -63,22 +65,28 @@ function populateFilters() {
   defaultYear.value = '';
   defaultYear.text = t.allYears;
   yearSelect.appendChild(defaultYear);
-  Array.from(yearSet).sort((a,b)=>b-a).forEach(y => {
-    const opt = document.createElement('option'); opt.value = y; opt.text = y;
+  Array.from(yearSet).sort((a,b)=>b-a).forEach(y=>{
+    const opt = document.createElement('option'); opt.value=y; opt.text=y;
     yearSelect.appendChild(opt);
   });
+
+  // Genres (bilingual)
+  const genreSet = new Set();
+  books.forEach(b => genreSet.add(currentLang==='fr'?b.genre:b.genre_en));
 
   const genreSelect = document.getElementById('genreFilter');
   genreSelect.innerHTML = '';
   const defaultGenre = document.createElement('option');
-  defaultGenre.value = ''; defaultGenre.text = t.allGenres;
+  defaultGenre.value=''; defaultGenre.text=t.allGenres;
   genreSelect.appendChild(defaultGenre);
-  Array.from(genreSet).sort().forEach(g => {
-    const opt = document.createElement('option'); opt.value = g; opt.text = g;
+
+  Array.from(genreSet).sort().forEach(g=>{
+    const opt = document.createElement('option'); opt.value=g; opt.text=g;
     genreSelect.appendChild(opt);
   });
 }
 
+// --- APPLY TRANSLATIONS ---
 function applyTranslations() {
   const t = translations[currentLang];
   document.querySelector("h1").innerText = t.title;
@@ -87,10 +95,11 @@ function applyTranslations() {
   const avgRating = books.length ? (books.reduce((a,b)=>a+b.rating,0)/books.length).toFixed(2) : 0;
   document.getElementById("avgRating").innerText = `${t.avg}: ${avgRating}`;
   const booksPerYear = {};
-  books.forEach(b => booksPerYear[b.year] = (booksPerYear[b.year] || 0)+1);
+  books.forEach(b => booksPerYear[b.year] = (booksPerYear[b.year]||0)+1);
   document.getElementById("booksPerYear").innerText = `${t.perYear}: ${JSON.stringify(booksPerYear)}`;
 }
 
+// --- RENDER BOOK CARDS ---
 function renderBooks() {
   const query = document.getElementById('searchInput').value.toLowerCase();
   const yearFilter = document.getElementById('yearFilter').value;
@@ -100,16 +109,19 @@ function renderBooks() {
   const container = document.getElementById('booksContainer');
   container.innerHTML = '';
 
-  const filteredBooks = books.filter(b =>
-    (b.title.toLowerCase().includes(query) ||
-     b.author.toLowerCase().includes(query) ||
-     (currentLang==='fr' ? (b.note_fr||'').toLowerCase().includes(query) : (b.note_en||'').toLowerCase().includes(query)) ||
-     String(b.year).includes(query)
-    ) &&
-    (yearFilter === "" || b.year==yearFilter) &&
-    (genreFilter === "" || b.genre==genreFilter) &&
-    (langFilter === "" || b.lang===langFilter || b.lang==="both")
-  );
+  const filteredBooks = books.filter(b=>{
+    const genreDisplay = currentLang==='fr'?b.genre:b.genre_en;
+    return (
+      (b.title.toLowerCase().includes(query) ||
+       b.author.toLowerCase().includes(query) ||
+       (currentLang==='fr'? (b.note_fr||'').toLowerCase() : (b.note_en||'').toLowerCase()) ||
+       String(b.year).includes(query)
+      ) &&
+      (yearFilter==='' || b.year==yearFilter) &&
+      (genreFilter==='' || genreDisplay==genreFilter) &&
+      (langFilter==='' || b.lang===langFilter || b.lang==='both')
+    );
+  });
 
   if(filteredBooks.length===0){
     container.innerHTML=`<p>${currentLang==='fr'?"Aucun livre trouvé":"No books found"}</p>`;
@@ -117,20 +129,23 @@ function renderBooks() {
   }
 
   filteredBooks.forEach(b=>{
+    const genreDisplay = currentLang==='fr'?b.genre:b.genre_en;
     const card = document.createElement('div');
     card.className='book-card';
-    card.innerHTML=`
+    card.innerHTML = `
       <h4>${b.title}</h4>
       <p>${b.author} (${b.year})</p>
-      <p>${currentLang==='fr'? (b.note_fr||"") : (b.note_en||"")}</p>
-      <p>${"⭐".repeat(b.rating)}</p>
-      <span class="genre-badge">${b.genre}</span>
+      <p class="star-rating">${"⭐".repeat(b.rating)}</p>
+      <span class="genre-badge genre-${genreDisplay.replace(/\s/g,'-')}">${genreDisplay}</span>
+      ${ (currentLang==='fr' ? b.note_fr : b.note_en) ? `<span class="note-tooltip">${currentLang==='fr'?b.note_fr:b.note_en}</span>` : '' }
     `;
     container.appendChild(card);
   });
 }
 
+// --- RENDER CHARTS ---
 function renderCharts() {
+  // Books per Year
   const booksPerYearData = {};
   books.forEach(b=>booksPerYearData[b.year]=(booksPerYearData[b.year]||0)+1);
   const years = Object.keys(booksPerYearData).sort();
@@ -142,9 +157,14 @@ function renderCharts() {
     options:{responsive:true, maintainAspectRatio:false}
   });
 
-  const genreData={};
-  books.forEach(b=>genreData[b.genre]=(genreData[b.genre]||0)+1);
-  const genres=Object.keys(genreData); const counts=genres.map(g=>genreData[g]);
+  // Genre Distribution
+  const genreData = {};
+  books.forEach(b=>{
+    const genreDisplay = currentLang==='fr'?b.genre:b.genre_en;
+    genreData[genreDisplay]=(genreData[genreDisplay]||0)+1;
+  });
+  const genres = Object.keys(genreData); 
+  const counts = genres.map(g=>genreData[g]);
   if(genreChart) genreChart.destroy();
   genreChart=new Chart(document.getElementById('genreChart'),{
     type:'pie',
@@ -153,8 +173,8 @@ function renderCharts() {
   });
 }
 
-// --- Load books.json ---
-document.addEventListener("DOMContentLoaded", () => {
+// --- LOAD books.json ---
+document.addEventListener("DOMContentLoaded",()=>{
   fetch('books.json')
     .then(res=>res.json())
     .then(data=>{
@@ -164,5 +184,5 @@ document.addEventListener("DOMContentLoaded", () => {
       renderBooks();
       renderCharts();
     })
-    .catch(err=>console.error("Failed to load books.json", err));
+    .catch(err=>console.error("Failed to load books.json",err));
 });
