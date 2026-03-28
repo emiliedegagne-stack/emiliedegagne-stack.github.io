@@ -74,37 +74,46 @@ function applyTranslations() {
 }
 
 function renderBooks() {
-  const container = document.getElementById('book-container');
-  const query = document.getElementById('search').value.toLowerCase();
+  const query = document.getElementById('searchInput').value.toLowerCase();
   const yearFilter = document.getElementById('yearFilter').value;
   const genreFilter = document.getElementById('genreFilter').value;
+  const langFilter = document.getElementById('langFilter').value;
 
+  const container = document.getElementById('booksContainer');
   container.innerHTML = '';
 
-  books
-    .filter(b => 
-      (b.title.toLowerCase().includes(query) ||
-       b.author.toLowerCase().includes(query) ||
-       (currentLang==='fr' ? b.note_fr?.toLowerCase().includes(query) : b.note_en?.toLowerCase().includes(query)) ||
-       String(b.year).includes(query)) &&
-      (yearFilter === "" || b.year == yearFilter) &&
-      (genreFilter === "" || b.genre == genreFilter)
-    )
-    .sort((a,b) => b.year - a.year)
-    .forEach(b => {
-      const stars = '⭐'.repeat(b.rating);
-      const note = currentLang === 'fr' ? b.note_fr || b.note_en : b.note_en || b.note_fr;
-      container.innerHTML += `
-        <div class="book-card">
-          <h2>${b.title}</h2>
-          <div class="author">${b.author} (${b.year})</div>
-          <div class="rating rating-${b.rating}">${stars}</div>
-          <div class="note">${note}</div>
-          <div class="genre">${b.genre}</div>
-        </div>
-      `;
-    });
-  renderCharts();
+  const filteredBooks = books.filter(b => 
+    // search matches title, author, or note in the current language
+    (b.title.toLowerCase().includes(query) ||
+     b.author.toLowerCase().includes(query) ||
+     (currentLang==='fr' ? (b.note_fr || '').toLowerCase().includes(query) : (b.note_en || '').toLowerCase().includes(query)) ||
+     String(b.year).includes(query)
+    ) &&
+    // year filter
+    (yearFilter === "" || b.year == yearFilter) &&
+    // genre filter
+    (genreFilter === "" || b.genre == genreFilter) &&
+    // language filter
+    (langFilter === "" || b.lang === langFilter || b.lang === "both")
+  );
+
+  if (filteredBooks.length === 0) {
+    container.innerHTML = `<p>${currentLang==='fr' ? "Aucun livre trouvé" : "No books found"}</p>`;
+    return;
+  }
+
+  filteredBooks.forEach(b => {
+    const card = document.createElement('div');
+    card.className = 'book-card';
+    card.innerHTML = `
+      <h4>${b.title}</h4>
+      <p>${b.author} (${b.year})</p>
+      <p>${currentLang==='fr' ? (b.note_fr || "") : (b.note_en || "")}</p>
+      <p>${"⭐".repeat(b.rating)}</p>
+      <span class="genre-badge">${b.genre}</span>
+    `;
+    container.appendChild(card);
+  });
 }
 
 function renderStats() {
