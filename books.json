@@ -1,38 +1,44 @@
 [
-  {
+{
     "title": "Sagarmatha, meutres au sommet",
     "author": "Chris Nerwiss",
     "rating": 4,
     "year": 2022,
-    "genre": "polar"
+    "genre": "polar",
+"lang": "fr"
   },
   {
     "title": "Les bourgeois de Calais",
     "author": "Michel Bernard",
     "rating": 3,
     "year": 2022,
-"genre": "Fiction historique"
+"genre": "Fiction historique",
+"lang": "fr"
   },
   {
     "title": "Le train des enfants",
     "author": "Viola Ardone",
     "rating": 5,
     "year": 2022,
-"genre": "Fiction historique"
+"genre": "Fiction historique",
+"lang": "fr"
   },
 {
     "title": "La société du sabs contact",
     "author": "François Saltiel",
     "rating": 3,
     "year": 2022,
-"genre": "Essai"
+"genre": "Essai",
+"lang": "fr"
   },
 {
     "title": "Une suite d’événements",
     "author": "Mikhail Chevelev",
     "rating": 5,
     "year": 2022,
-"genre": "Roman"
+"genre": "Roman",
+"lang": "fr"
   },
+
 
 ]
