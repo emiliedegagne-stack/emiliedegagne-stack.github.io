@@ -41,6 +41,18 @@ fetch('books.json')
     renderCharts();
   });
 
+function updateLanguageDropdown() {
+  const langSelect = document.getElementById('langFilter');
+  const t = translations[currentLang];
+
+  langSelect.innerHTML = `
+    <option value="">${t.langAll}</option>
+    <option value="fr">${t.langFr}</option>
+    <option value="en">${t.langEn}</option>
+    <option value="both">${t.langBoth}</option>
+  `;
+}
+
 function populateFilters() {
   const yearSet = new Set();
   const genreSet = new Set();
