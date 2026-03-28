@@ -129,18 +129,24 @@ function renderBooks() {
   }
 
   filteredBooks.forEach(b=>{
-    const genreDisplay = currentLang==='fr'?b.genre:b.genre_en;
-    const card = document.createElement('div');
-    card.className='book-card';
-    card.innerHTML = `
-      <h4>${b.title}</h4>
-      <p>${b.author} (${b.year})</p>
-      <p class="star-rating">${"⭐".repeat(b.rating)}</p>
-      <span class="genre-badge genre-${genreDisplay.replace(/\s/g,'-')}">${genreDisplay}</span>
-      ${ (currentLang==='fr' ? b.note_fr : b.note_en) ? `<span class="note-tooltip">${currentLang==='fr'?b.note_fr:b.note_en}</span>` : '' }
-    `;
-    container.appendChild(card);
-  });
+  const genreDisplay = currentLang==='fr'?b.genre:b.genre_en;
+  const card = document.createElement('div');
+  card.className='book-card';
+  card.innerHTML = `
+    <h4>${b.title}</h4>
+    <p>${b.author} (${b.year})</p>
+    <p class="star-rating">${"⭐".repeat(b.rating)}</p>
+    <span class="genre-badge genre-${genreDisplay.replace(/\s/g,'-')}">${genreDisplay}</span>
+    ${ (currentLang==='fr' ? b.note_fr : b.note_en) ? `<span class="note-tooltip">${currentLang==='fr'?b.note_fr:b.note_en}</span>` : '' }
+  `;
+  
+  // --- assigner l'index pour la couleur ---
+  const allGenres = Array.from(new Set(books.map(b => currentLang==='fr'?b.genre:b.genre_en)));
+  const genreIndex = allGenres.indexOf(genreDisplay);
+  card.querySelector('.genre-badge').style.setProperty('--genre-index', genreIndex);
+
+  container.appendChild(card);
+});
 }
 
 // --- RENDER CHARTS ---
