@@ -1,4 +1,4 @@
-let books = [];
+let books = []; // your books.json data will be loaded here
 let currentLang = 'en';
 let booksPerYearChart, genreChart;
 
@@ -10,7 +10,11 @@ const translations = {
     avg: "⭐ Average Rating",
     perYear: "📅 Books per Year",
     allYears: "All Years",
-    allGenres: "All Genres"
+    allGenres: "All Genres",
+    langAll: "All Languages",
+    langFr: "French",
+    langEn: "English",
+    langBoth: "Both"
   },
   fr: {
     title: "📚 Mon Journal de Lecture",
@@ -19,24 +23,29 @@ const translations = {
     avg: "⭐ Note moyenne",
     perYear: "📅 Livres par année",
     allYears: "Toutes les années",
-    allGenres: "Tous les genres"
+    allGenres: "Tous les genres",
+    langAll: "Toutes les langues",
+    langFr: "Français",
+    langEn: "Anglais",
+    langBoth: "Les deux"
   }
 };
 
+// ----- Language toggle -----
 function setLanguage(lang) {
   currentLang = lang;
   applyTranslations();       // update site text
   populateFilters();         // update year & genre dropdowns
-  updateFormPlaceholders();  // update Add Book form
+  updateFormPlaceholders();  // update Add Book form if you have one
   updateLanguageDropdown();  // update language filter labels
   renderBooks();             // redraw book cards
   renderCharts();            // redraw charts
 }
 
+// ----- Language dropdown -----
 function updateLanguageDropdown() {
   const langSelect = document.getElementById('langFilter');
   const t = translations[currentLang];
-
   langSelect.innerHTML = `
     <option value="">${t.langAll}</option>
     <option value="fr">${t.langFr}</option>
@@ -45,12 +54,19 @@ function updateLanguageDropdown() {
   `;
 }
 
+// ----- Populate year & genre filters -----
 function populateFilters() {
   const yearSet = new Set();
   const genreSet = new Set();
   books.forEach(b => { yearSet.add(b.year); genreSet.add(b.genre); });
 
   const yearSelect = document.getElementById('yearFilter');
+  yearSelect.innerHTML = ''; // clear old options
+  const t = translations[currentLang];
+  const defaultYear = document.createElement('option');
+  defaultYear.value = '';
+  defaultYear.text = t.allYears;
+  yearSelect.appendChild(defaultYear);
   Array.from(yearSet).sort((a,b) => b-a).forEach(y => {
     const option = document.createElement('option');
     option.value = y; option.text = y;
@@ -58,6 +74,11 @@ function populateFilters() {
   });
 
   const genreSelect = document.getElementById('genreFilter');
+  genreSelect.innerHTML = ''; // clear old options
+  const defaultGenre = document.createElement('option');
+  defaultGenre.value = '';
+  defaultGenre.text = t.allGenres;
+  genreSelect.appendChild(defaultGenre);
   Array.from(genreSet).sort().forEach(g => {
     const option = document.createElement('option');
     option.value = g; option.text = g;
@@ -65,18 +86,20 @@ function populateFilters() {
   });
 }
 
+// ----- Apply translations to static text -----
 function applyTranslations() {
   const t = translations[currentLang];
   document.querySelector("h1").innerText = t.title;
-  document.getElementById("search").placeholder = t.search;
+  document.getElementById("searchInput").placeholder = t.search;
   document.getElementById("totalBooks").innerText = `${t.total}: ${books.length}`;
-  const avgRating = (books.reduce((a,b) => a+b.rating,0)/books.length).toFixed(2);
+  const avgRating = books.length ? (books.reduce((a,b) => a+b.rating,0)/books.length).toFixed(2) : 0;
   document.getElementById("avgRating").innerText = `${t.avg}: ${avgRating}`;
   const booksPerYear = {};
   books.forEach(b => booksPerYear[b.year] = (booksPerYear[b.year] || 0) + 1);
   document.getElementById("booksPerYear").innerText = `${t.perYear}: ${JSON.stringify(booksPerYear)}`;
 }
 
+// ----- Render books -----
 function renderBooks() {
   const query = document.getElementById('searchInput').value.toLowerCase();
   const yearFilter = document.getElementById('yearFilter').value;
@@ -87,17 +110,13 @@ function renderBooks() {
   container.innerHTML = '';
 
   const filteredBooks = books.filter(b => 
-    // search matches title, author, or note in the current language
     (b.title.toLowerCase().includes(query) ||
      b.author.toLowerCase().includes(query) ||
      (currentLang==='fr' ? (b.note_fr || '').toLowerCase().includes(query) : (b.note_en || '').toLowerCase().includes(query)) ||
      String(b.year).includes(query)
     ) &&
-    // year filter
     (yearFilter === "" || b.year == yearFilter) &&
-    // genre filter
     (genreFilter === "" || b.genre == genreFilter) &&
-    // language filter
     (langFilter === "" || b.lang === langFilter || b.lang === "both")
   );
 
@@ -120,10 +139,12 @@ function renderBooks() {
   });
 }
 
-function renderStats() {
-  applyTranslations();
+// ----- Optional Add Book form placeholders -----
+function updateFormPlaceholders() {
+  // Only if you implement an Add Book form
 }
 
+// ----- Charts -----
 function renderCharts() {
   // Books per Year
   const booksPerYearData = {};
@@ -163,3 +184,13 @@ function renderCharts() {
     options: { responsive: true, maintainAspectRatio: false }
   });
 }
+
+// ----- Initial load (example) -----
+document.addEventListener("DOMContentLoaded", () => {
+  // load your books here or via fetch('books.json')
+  // Example: books = [...]; 
+  populateFilters();
+  updateLanguageDropdown();
+  renderBooks();
+  renderCharts();
+});
