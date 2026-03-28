@@ -5,7 +5,8 @@
     "rating": 4,
     "year": 2022,
 "lang": "fr",
-    "genre": "Polar",
+     "genre": "Thriller",
+    "genre_en": "Thriller",
 "note_fr": "",
 "note_en": ""  
 },
@@ -14,7 +15,8 @@
     "author": "Michel Bernard",
     "rating": 3,
     "year": 2022,
-    "genre": "Roman historique",
+    "genre": "Fiction",
+        "genre_en": "Fiction",
 "lang": "fr",
 "note_fr": "",
 "note_en": ""  
@@ -24,7 +26,8 @@
     "author": "Viola Ardone",
     "rating": 5,
     "year": 2022,
-    "genre": "Roman historique",
+    "genre": "Fiction",
+        "genre_en": "Fiction",
 "lang": "fr",
 "note_fr": "",
 "note_en": ""  
@@ -34,7 +37,8 @@
     "author": "François Saltiel",
     "rating": 3,
     "year": 2022,
-"genre": "Essai",
+"genre": "Non-fiction",
+      "genre_en": "Non-fiction",
 "lang": "fr",
 "note_fr": "",
 "note_en": "" 
@@ -44,7 +48,8 @@
     "author": "Mikhail Chevelev",
     "rating": 5,
     "year": 2022,
-"genre": "Roman",
+"genre": "Fiction",
+      "genre_en": "Fiction",
 "lang": "fr",
 "note_fr": "",
 "note_en": ""
@@ -55,7 +60,8 @@
     "author": "Marie Pavlenko",
     "rating": 4,
     "year": 2026,
-"genre": "Roman",
+"genre": "Fiction",
+      "genre_en": "Fiction",
 "lang": "fr",
 "note_fr": "",
 "note_en": ""
@@ -65,7 +71,8 @@
     "author": "Gaël Tchakaloff",
     "rating": 1,
     "year": 2026,
-"genre": "Essais",
+"genre": "Non-fiction",
+        "genre_en": "Non-fiction",
 "lang": "fr",
 "note_fr": "",
 "note_en": ""
