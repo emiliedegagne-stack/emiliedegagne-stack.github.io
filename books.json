@@ -1,20 +1,38 @@
 [
   {
-    "title": "Atomic Habits",
-    "author": "James Clear",
-    "rating": 5,
-    "year": 2026,
-    "note_en": "Super practical and clear",
-    "note_fr": "Super pratique et clair",
-    "genre": "Self-Help"
+    "title": "Sagarmatha, meutres au sommet",
+    "author": "Chris Nerwiss",
+    "rating": 4,
+    "year": 2022,
+    "genre": "polar"
   },
   {
-    "title": "The Left Hand of Darkness",
-    "author": "Ursula K. Le Guin",
-    "rating": 4,
-    "year": 2026,
-    "note_en": "Thought-provoking sci-fi",
-    "note_fr": "Science-fiction qui fait réfléchir",
-    "genre": "Science Fiction"
-  }
+    "title": "Les bourgeois de Calais",
+    "author": "Michel Bernard",
+    "rating": 3,
+    "year": 2022,
+"genre": "Fiction historique"
+  },
+  {
+    "title": "Le train des enfants",
+    "author": "Viola Ardone",
+    "rating": 5,
+    "year": 2022,
+"genre": "Fiction historique"
+  },
+{
+    "title": "La société du sabs contact",
+    "author": "François Saltiel",
+    "rating": 3,
+    "year": 2022,
+"genre": "Essai"
+  },
+{
+    "title": "Une suite d’événements",
+    "author": "Mikhail Chevelev",
+    "rating": 5,
+    "year": 2022,
+"genre": "Roman"
+  },
+
 ]
