@@ -10,12 +10,14 @@
 
 <h1>📚 My Reading Dashboard</h1>
 
+<!-- Language toggle -->
 <div id="language-toggle">
   <button onclick="setLanguage('en')">English</button>
   <button onclick="setLanguage('fr')">Français</button>
 </div>
 
-<div id="filters" style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px;">
+<!-- Filters -->
+<div id="filters">
   <input type="text" id="searchInput" placeholder="Search books..." oninput="renderBooks()">
   <select id="yearFilter" onchange="renderBooks()">
     <option value="">All Years</option>
@@ -31,18 +33,21 @@
   </select>
 </div>
 
-<div id="stats" style="display:flex; gap:20px; margin-bottom:20px;">
+<!-- Stats -->
+<div id="stats">
   <div id="totalBooks"></div>
   <div id="avgRating"></div>
   <div id="booksPerYear"></div>
 </div>
 
-<div id="charts" style="display:flex; flex-wrap:wrap; gap:20px; margin-bottom:20px;">
-  <canvas id="booksPerYearChart" style="flex:1; min-width:300px; height:250px;"></canvas>
-  <canvas id="genreChart" style="flex:1; min-width:300px; height:250px;"></canvas>
+<!-- Charts -->
+<div id="charts">
+  <canvas id="booksPerYearChart"></canvas>
+  <canvas id="genreChart"></canvas>
 </div>
 
-<div id="booksContainer" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap:20px;"></div>
+<!-- Book cards -->
+<div id="booksContainer"></div>
 
 <script src="script.js"></script>
 </body>
