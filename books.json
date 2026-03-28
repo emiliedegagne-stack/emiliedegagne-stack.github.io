@@ -4,39 +4,47 @@
     "author": "Chris Nerwiss",
     "rating": 4,
     "year": 2022,
-    "genre": "polar",
-    "lang": "fr"
-  },
+"lang": "fr",
+"note_fr": "",
+"note_en": ""  
+},
   {
     "title": "Les bourgeois de Calais",
     "author": "Michel Bernard",
     "rating": 3,
     "year": 2022,
-    "genre": "Fiction historique",
-    "lang": "fr"
-  },
+"lang": "fr",
+"note_fr": "",
+"note_en": ""  
+},
   {
     "title": "Le train des enfants",
     "author": "Viola Ardone",
     "rating": 5,
     "year": 2022,
-    "genre": "Fiction historique",
-    "lang": "fr"
-  },
-  {
-    "title": "La société du sans contact",
+"lang": "fr",
+"note_fr": "",
+"note_en": ""  
+},
+{
+    "title": "La société du sabs contact",
     "author": "François Saltiel",
     "rating": 3,
     "year": 2022,
-    "genre": "Essai",
-    "lang": "fr"
-  },
-  {
+"genre": "Essai",
+"lang": "fr",
+"note_fr": "",
+"note_en": "" 
+ },
+{
     "title": "Une suite d’événements",
     "author": "Mikhail Chevelev",
     "rating": 5,
     "year": 2022,
-    "genre": "Roman",
-    "lang": "fr"
-  }
+"genre": "Roman",
+"lang": "fr",
+"note_fr": "",
+"note_en": ""
+ }
+
 ]
