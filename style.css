@@ -114,6 +114,7 @@ h1 {
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
 }
 
 .book-card:hover {
@@ -121,6 +122,7 @@ h1 {
   box-shadow: 0 6px 20px rgba(0,0,0,0.12);
 }
 
+/* Title and author */
 .book-card h4 {
   font-size: 1.1rem;
   margin-bottom: 6px;
@@ -131,14 +133,46 @@ h1 {
   margin-bottom: 5px;
 }
 
+/* Stars */
+.star-rating {
+  color: #ffc107;
+  font-size: 1rem;
+}
+
+/* Genre badge colors */
 .genre-badge {
   display: inline-block;
   padding: 3px 8px;
   border-radius: 8px;
-  background-color: #1e90ff;
-  color: white;
   font-size: 0.75rem;
   margin-top: 5px;
+  color: white;
+}
+
+.genre-Polar { background-color: #ff6b6b; }
+.genre-Fiction { background-color: #6bc1ff; }
+.genre-Science { background-color: #6bff9e; }
+.genre-"Fiction historique" { background-color: #ff9e6b; }
+.genre-Roman { background-color: #d46bff; }
+.genre-Essai { background-color: #ffde6b; }
+
+/* Tooltip for notes */
+.book-card .note-tooltip {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #1e90ff;
+  color: white;
+  padding: 5px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  display: none;
+  max-width: 180px;
+  z-index: 10;
+}
+
+.book-card:hover .note-tooltip {
+  display: block;
 }
 
 /* Responsive tweaks */
