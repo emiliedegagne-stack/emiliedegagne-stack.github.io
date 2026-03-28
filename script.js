@@ -25,21 +25,13 @@ const translations = {
 
 function setLanguage(lang) {
   currentLang = lang;
-  applyTranslations();
-  renderBooks();
-  renderCharts();
+  applyTranslations();       // update site text
+  populateFilters();         // update year & genre dropdowns
+  updateFormPlaceholders();  // update Add Book form
+  updateLanguageDropdown();  // update language filter labels
+  renderBooks();             // redraw book cards
+  renderCharts();            // redraw charts
 }
-
-fetch('books.json')
-  .then(res => res.json())
-  .then(data => {
-    books = data;
-    populateFilters();
-    renderBooks();
-    renderStats();
-    applyTranslations();
-    renderCharts();
-  });
 
 function updateLanguageDropdown() {
   const langSelect = document.getElementById('langFilter');
