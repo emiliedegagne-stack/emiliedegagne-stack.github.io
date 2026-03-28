@@ -147,15 +147,7 @@ h1 {
   font-size: 0.75rem;
   margin-top: 5px;
   color: white;
-}
-
-/* Automatic unique color for each genre */
-.book-card .genre-badge {
-  background-color: hsl(
-    calc(var(--genre-index) * 60),
-    70%,
-    60%
-  );
+  background-color: hsl(calc(var(--genre-index) * 60), 70%, 60%);
 }
 
 /* --- TOOLTIP FOR NOTES --- */
