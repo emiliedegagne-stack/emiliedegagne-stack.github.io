@@ -31,6 +31,15 @@ const translations = {
   }
 };
 
+const genreMap = {
+  "Fiction":"Fiction",
+  "Non-Fiction":"Non-fiction",
+  "Mystery / Thriller":"Mystère / Thriller",
+  "Romance":"Romance",
+  "Fantasy / Sci-Fi":"Fantastique / Science-fiction",
+  "Poetry / Drama":"Poésie / Théâtre"
+};
+
 // --- LANGUAGE SWITCH ---
 function setLanguage(lang) {
   currentLang = lang;
@@ -69,9 +78,8 @@ function populateFilters() {
     yearSelect.appendChild(opt);
   });
 
-  // Genres (bilingual)
   const genreSet = new Set();
-  books.forEach(b => genreSet.add(currentLang==='fr'?b.genre:b.genre_en));
+  books.forEach(b => genreSet.add(currentLang==='fr'?b.genre:b.genre));
 
   const genreSelect = document.getElementById('genreFilter');
   genreSelect.innerHTML = '';
@@ -109,7 +117,7 @@ function renderBooks() {
   container.innerHTML = '';
 
   const filteredBooks = books.filter(b=>{
-    const genreDisplay = currentLang==='fr'?b.genre:b.genre_en;
+    const genreDisplay = currentLang==='fr'?b.genre:b.genre;
     return (
       (b.title.toLowerCase().includes(query) ||
        b.author.toLowerCase().includes(query) ||
@@ -127,24 +135,22 @@ function renderBooks() {
     return;
   }
 
-  // Crée la liste unique des genres pour les couleurs
-  const allGenres = Array.from(new Set(books.map(b => currentLang==='fr'?b.genre:b.genre_en)));
+  const allGenres = Array.from(new Set(books.map(b=>currentLang==='fr'?b.genre:b.genre)));
 
   filteredBooks.forEach(b=>{
-    const genreDisplay = currentLang==='fr'?b.genre:b.genre_en;
+    const genreDisplay = currentLang==='fr'?b.genre:b.genre;
     const card = document.createElement('div');
     card.className='book-card';
     card.innerHTML = `
       <h4>${b.title}</h4>
       <p>${b.author} (${b.year})</p>
       <p class="star-rating">${"⭐".repeat(b.rating)}</p>
-      <span class="genre-badge genre-${genreDisplay.replace(/\s/g,'-')}">${genreDisplay}</span>
+      <span class="genre-badge">${genreDisplay}</span>
       ${ (currentLang==='fr' ? b.note_fr : b.note_en) ? `<span class="note-tooltip">${currentLang==='fr'?b.note_fr:b.note_en}</span>` : '' }
     `;
-
-    // --- assigner l'index pour la couleur ---
+    const genreBadge = card.querySelector('.genre-badge');
     const genreIndex = allGenres.indexOf(genreDisplay);
-    card.querySelector('.genre-badge').style.setProperty('--genre-index', genreIndex);
+    genreBadge.style.setProperty('--genre-index', genreIndex);
 
     container.appendChild(card);
   });
@@ -152,7 +158,6 @@ function renderBooks() {
 
 // --- RENDER CHARTS ---
 function renderCharts() {
-  // Books per Year
   const booksPerYearData = {};
   books.forEach(b=>booksPerYearData[b.year]=(booksPerYearData[b.year]||0)+1);
   const years = Object.keys(booksPerYearData).sort();
@@ -164,10 +169,9 @@ function renderCharts() {
     options:{responsive:true, maintainAspectRatio:false}
   });
 
-  // Genre Distribution
   const genreData = {};
   books.forEach(b=>{
-    const genreDisplay = currentLang==='fr'?b.genre:b.genre_en;
+    const genreDisplay = currentLang==='fr'?b.genre:b.genre;
     genreData[genreDisplay]=(genreData[genreDisplay]||0)+1;
   });
   const genres = Object.keys(genreData); 
