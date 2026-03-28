@@ -5,6 +5,7 @@
     "rating": 4,
     "year": 2022,
 "lang": "fr",
+    "genre": "Polar",
 "note_fr": "",
 "note_en": ""  
 },
@@ -13,6 +14,7 @@
     "author": "Michel Bernard",
     "rating": 3,
     "year": 2022,
+    "genre": "Roman historique",
 "lang": "fr",
 "note_fr": "",
 "note_en": ""  
@@ -22,12 +24,13 @@
     "author": "Viola Ardone",
     "rating": 5,
     "year": 2022,
+    "genre": "Roman historique",
 "lang": "fr",
 "note_fr": "",
 "note_en": ""  
 },
 {
-    "title": "La société du sabs contact",
+    "title": "La société du sans contact",
     "author": "François Saltiel",
     "rating": 3,
     "year": 2022,
@@ -45,6 +48,26 @@
 "lang": "fr",
 "note_fr": "",
 "note_en": ""
+ },
+  
+{
+    "title": "Traverser les montagnes, et venir naître ici",
+    "author": "Marie Pavlenko",
+    "rating": 4,
+    "year": 2026,
+"genre": "Roman",
+"lang": "fr",
+"note_fr": "",
+"note_en": ""
+ },
+  {
+    "title": "La vie à mort",
+    "author": "Gaël Tchakaloff",
+    "rating": 1,
+    "year": 2026,
+"genre": "Essais",
+"lang": "fr",
+"note_fr": "",
+"note_en": ""
  }
-
 ]
