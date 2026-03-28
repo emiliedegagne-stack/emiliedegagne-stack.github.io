@@ -10,7 +10,7 @@
 
 <h1>📚 My Reading Dashboard</h1>
 
-<!-- Language toggle -->
+<!-- Language Toggle -->
 <div id="language-toggle">
   <button onclick="setLanguage('en')">English</button>
   <button onclick="setLanguage('fr')">Français</button>
@@ -19,12 +19,15 @@
 <!-- Filters -->
 <div id="filters">
   <input type="text" id="searchInput" placeholder="Search books..." oninput="renderBooks()">
+  
   <select id="yearFilter" onchange="renderBooks()">
     <option value="">All Years</option>
   </select>
+
   <select id="genreFilter" onchange="renderBooks()">
     <option value="">All Genres</option>
   </select>
+
   <select id="langFilter" onchange="renderBooks()">
     <option value="">All Languages</option>
     <option value="fr">Français</option>
@@ -46,9 +49,10 @@
   <canvas id="genreChart"></canvas>
 </div>
 
-<!-- Book cards -->
+<!-- Book Cards -->
 <div id="booksContainer"></div>
 
+<!-- Script -->
 <script src="script.js"></script>
 </body>
 </html>
