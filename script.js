@@ -31,7 +31,6 @@ const translations = {
   }
 };
 
-// --- Language toggle ---
 function setLanguage(lang) {
   currentLang = lang;
   applyTranslations();
@@ -41,7 +40,6 @@ function setLanguage(lang) {
   renderCharts();
 }
 
-// --- Language dropdown ---
 function updateLanguageDropdown() {
   const langSelect = document.getElementById('langFilter');
   const t = translations[currentLang];
@@ -53,7 +51,6 @@ function updateLanguageDropdown() {
   `;
 }
 
-// --- Populate year & genre filters ---
 function populateFilters() {
   const yearSet = new Set();
   const genreSet = new Set();
@@ -82,7 +79,6 @@ function populateFilters() {
   });
 }
 
-// --- Apply translations ---
 function applyTranslations() {
   const t = translations[currentLang];
   document.querySelector("h1").innerText = t.title;
@@ -95,7 +91,6 @@ function applyTranslations() {
   document.getElementById("booksPerYear").innerText = `${t.perYear}: ${JSON.stringify(booksPerYear)}`;
 }
 
-// --- Render books ---
 function renderBooks() {
   const query = document.getElementById('searchInput').value.toLowerCase();
   const yearFilter = document.getElementById('yearFilter').value;
@@ -135,7 +130,6 @@ function renderBooks() {
   });
 }
 
-// --- Charts ---
 function renderCharts() {
   const booksPerYearData = {};
   books.forEach(b=>booksPerYearData[b.year]=(booksPerYearData[b.year]||0)+1);
