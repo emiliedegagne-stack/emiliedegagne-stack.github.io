@@ -722,7 +722,7 @@
     "year": 2023,
 "genre": "Non-fiction",
     "genre_en": "Non-fiction",
-"lang": "en",
+"lang": "fr",
 "note_fr": "",
 "note_en": ""
  },
@@ -730,6 +730,28 @@
     "title": "Le café suspendu",
     "author": "Amanda Sthers",
     "rating": 4,
+    "year": 2023,
+"genre": "Fiction",
+    "genre_en": "Fiction",
+"lang": "fr",
+"note_fr": "",
+"note_en": ""
+ },
+  {
+    "title": "A world of curiosities",
+    "author": "Louise Penny",
+    "rating": 4,
+    "year": 2023,
+"genre": "Mystère / Thriller",
+    "genre_en": "Mystery / Thriller",
+"lang": "en",
+"note_fr": "",
+"note_en": ""
+ },
+  {
+    "title": "Le premier rêve du monde",
+    "author": "Anne Sibran",
+    "rating": 3,
     "year": 2023,
 "genre": "Fiction",
     "genre_en": "Fiction",
