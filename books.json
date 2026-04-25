@@ -76,5 +76,115 @@
 "lang": "fr",
 "note_fr": "",
 "note_en": ""
+ },
+  {
+    "title": "The Helsinki affair",
+    "author": "Anna Pitoniak",
+    "rating": 3,
+    "year": 2026,
+ "genre": "Mystère / Thriller",
+    "genre_en": "Mystery / Thriller",
+"lang": "en",
+"note_fr": "",
+"note_en": ""
+ },
+   {
+    "title": "Les braises de Patagonie",
+    "author": "Delphine Grouès",
+    "rating": 3,
+    "year": 2026,
+ "genre": "Fiction",
+    "genre_en": "Fiction",
+"lang": "fr",
+"note_fr": "",
+"note_en": ""
+ },
+  {
+    "title": "The Black Loch",
+    "author": "Peter May",
+    "rating": 4,
+    "year": 2026,
+ "genre": "Mystère / Thriller",
+    "genre_en": "Mystery / Thriller",
+"lang": "en",
+"note_fr": "",
+"note_en": ""
+ },
+  {
+    "title": "Sous leurs pas, les années",
+    "author": "Camille Bordenet",
+    "rating": 3,
+    "year": 2026,
+  "genre": "Fiction",
+    "genre_en": "Fiction",
+"lang": "fr",
+"note_fr": "",
+"note_en": ""
+ },
+     {
+    "title": "L'usage du Japon",
+    "author": "Emmanuel Ruben",
+    "rating": 2,
+    "year": 2026,
+  "genre": "Non-fiction",
+    "genre_en": "Non-fiction",
+"lang": "fr",
+"note_fr": "",
+"note_en": ""
+ },
+    {
+    "title": "Les assasins de l'aube",
+    "author": "Michel Bussi",
+    "rating": 4,
+    "year": 2026,
+"genre": "Mystère / Thriller",
+    "genre_en": "Mystery / Thriller",
+"lang": "fr",
+"note_fr": "",
+"note_en": ""
+ },
+    {
+    "title": "The coast road",
+    "author": "Alan Murrin",
+    "rating": 3,
+    "year": 2026,
+"genre": "Mystère / Thriller",
+    "genre_en": "Mystery / Thriller",
+"lang": "en",
+"note_fr": "",
+"note_en": ""
+ },
+   {
+    "title": "First lie wins",
+    "author": "Ashley Elston",
+    "rating": 5,
+    "year": 2026,
+"genre": "Mystère / Thriller",
+    "genre_en": "Mystery / Thriller",
+"lang": "en",
+"note_fr": "",
+"note_en": ""
+ },
+    {
+    "title": "Contre vents et marées, l'histoire de Nellie Bly",
+    "author": "Nicola Attadio",
+    "rating": 3,
+    "year": 2026,
+ "genre": "Non-fiction",
+    "genre_en": "Non-fiction",
+"lang": "fr",
+"note_fr": "",
+"note_en": ""
+ },
+      {
+    "title": "Kill your darlings",
+    "author": "Peter Swanson",
+    "rating": 3,
+    "year": 2026,
+ "genre": "Mystère / Thriller",
+    "genre_en": "Mystery / Thriller",
+"lang": "en",
+"note_fr": "",
+"note_en": ""
  }
 ]
